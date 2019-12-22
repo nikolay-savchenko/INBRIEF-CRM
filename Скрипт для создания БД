@@ -1,0 +1,112 @@
+drop database if exists TEST_EX;
+CREATE DATABASE TEST_EX1;
+USE TEST_EX1;
+
+DELIMITER //
+drop table fio//
+CREATE TABLE `FIO` (
+  `FIO_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `Fname` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `Sname` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `Lname` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+PRIMARY KEY (`FIO_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci//
+
+DROP TABLE `Passports`//
+CREATE TABLE `passports` (
+  `passportId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `FIO_id` varchar(100) NOT NULL,
+  `serial` varchar(100) NOT NULL,
+  `Number` varchar(100) NOT NULL,
+   `Issueddate` date NOT NULL,
+   `birthcity` varchar(100) NOT NULL,
+   `birthday` date NOT NULL,
+   `Addressid` int NOT NULL,
+PRIMARY KEY (`PassportId`)
+)//
+
+DROP TABLE `Phones`//
+CREATE TABLE `Phones` (
+  `PhoneId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `PhoneNumber` varchar(100) NOT NULL,
+PRIMARY KEY (`PhoneId`)
+)//
+
+DROP TABLE IF EXISTS OrderPhones//
+CREATE TABLE `OrderPhones` (
+   `OrderId`int(10) unsigned,
+   `PhoneID` int(10) unsigned,
+ CONSTRAINT OrderPhones_OrderId_FK 
+	FOREIGN KEY (OrderId) 
+		references orders(OrderId) 
+			ON DELETE CASCADE,
+ CONSTRAINT OrderPhones_PhoneId_FK 
+	FOREIGN KEY (PhoneID) 
+		references Phones(PhoneId) 
+			ON DELETE SET NULL
+)//
+
+DROP TABLE `address`//
+CREATE TABLE `address` (
+  `AddressId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `city` varchar(100) NOT NULL,
+  `street` varchar(100) NOT NULL,
+  `House` varchar(100) NOT NULL,
+   `AppartmentNumber` int NOT NULL,
+   `PorchNumber` varchar(100) NOT NULL,
+   `Floor` int NOT NULL,
+PRIMARY KEY (`AddressId`)
+)//
+
+DROP TABLE `orders`//
+CREATE TABLE `orders` (
+   `OrderId`int(10) unsigned NOT NULL AUTO_INCREMENT,
+   `FIO_Id` int(10) unsigned default NULL,
+  `AddressId` int(10) unsigned default NULL,
+  `fullsum` varchar(100) NOT NULL,
+PRIMARY KEY (`OrderId`)
+)//
+ALTER TABLE orders 
+ADD MasterId int(10) unsigned default NULL,
+ADD CONSTRAINT orders_MasterId_fk 
+    FOREIGN KEY (MasterId) REFERENCES Masters(MasterId)
+      ON DELETE SET NULL//
+ALTER TABLE orders 
+ADD OrderDate date;
+
+ALTER TABLE orders
+  ADD CONSTRAINT orders_AdressId_fk 
+    FOREIGN KEY (AddressId) REFERENCES Address(Addressid)
+      ON DELETE SET NULL,
+  ADD CONSTRAINT orders_FIO_id_fk
+    FOREIGN KEY (FIO_id) REFERENCES FIO(FIO_id)
+      ON DELETE SET NULL//
+desc passports//
+ALTER TABLE passports CHANGE FIO_id FIO_id int(10) unsigned//
+ALTER TABLE passports CHANGE adress_id AddressId int NOT NULL//
+
+ALTER TABLE passports
+  ADD CONSTRAINT passports_FIO_id_fk 
+    FOREIGN KEY (FIO_id) REFERENCES FIO(FIO_id)
+      ON DELETE cascade//
+ 
+ 
+DROP TABLE IF EXISTS Masters//
+CREATE TABLE `Masters` (
+   `MasterId`int(10) unsigned NOT NULL AUTO_INCREMENT,
+   `PassportId` int(10) unsigned DEFAULT NULL,
+   `RealAddressId`int(10) unsigned DEFAULT NULL,
+   `HireDate`DATE,
+PRIMARY KEY (`MasterId`),
+ CONSTRAINT Masters_PassportId_FK
+	FOREIGN KEY (PassportId) 
+		REFERENCES Passports(PassportId) 
+			ON DELETE CASCADE,
+ CONSTRAINT Masters_RealAddressId_FK 
+	FOREIGN KEY (RealAddressId) 
+		REFERENCES Address(AddressId) 
+			ON DELETE SET NULL
+)//
+
+ DELIMITER ;
+      
