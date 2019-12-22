@@ -1,0 +1,340 @@
+
+-- Задача 1.
+-- Составить отчет по заказам с начала 2018 года по людям. На выходе должны получить
+-- имя, отчество, фамилию, количество заказов, последний телефон, последний адрес
+-- доставки и последняя дата заказа. Имя, отчество и фамилия повторяться не должны.
+-- Можно несколькими запросами. Использование переменных нежелательно.
+
+    
+SELECT t7.FIO_id, t5.full_name, t7.last_orderdate, 
+		t8.orderid as last_orderid,
+		t9.last_phone, t6.q_orders
+FROM 
+	(
+	SELECT Orders.FIO_id, max(Orders.OrderDate) AS last_orderdate
+	FROM Orders 
+	GROUP BY Orders.FIO_id -- last date -fioid
+	) as t7 
+JOIN 
+	(
+	SELECT Orders.orderid, Orders.FIO_id, Orders.OrderDate
+	FROM Orders
+	) as t8
+ON t7.FIO_id=t8.FIO_id and t7.last_orderdate=t8.OrderDate
+JOIN 
+	(
+	SELECT OrderPhones.OrderId, OrderPhones.phoneid AS last_phone, Phones.PhoneNumber
+	FROM OrderPhones
+	JOIN Phones
+	ON OrderPhones.phoneid=Phones.phoneid
+	) as t9
+ON t9.OrderId=t8.orderid
+JOIN 
+	(
+	SELECT t2.FIO_Id, COUNT(t2.FIO_Id) as q_orders 
+	FROM
+		(
+		SELECT Orders.FIO_Id, Orders.OrderDate 
+		from Orders 
+		WHERE Orders.OrderDate >'2018-01-01'
+		) as t2
+	GROUP BY t2.FIO_Id
+    ) as t6
+ON t6.FIO_Id=t7.FIO_id
+JOIN (
+	SELECT FIO.FIO_Id, CONCAT(FIO.FName, ' ', FIO.SName, ' ', FIO.LName) AS full_name
+    from fio
+    ) as t5
+ON t5.FIO_Id = t7.FIO_Id;
+    
+
+-- Задача 2.
+-- Для проведения почтовой рассылки необходимо выгрузить адреса пользователей из
+-- Самары с именами, отчествами и фамилиями, которые в период 01.07.2018 – 31.12.2018
+-- (включительно) сделали заказы на сумму больше 3000 рублей.
+
+SELECT t3.full_name, t1.ADDRSS, t2.fullsum
+FROM passports
+JOIN 
+	(
+    SELECT Address.AddressId, Address.City, CONCAT( Address.City, ' ', Address.Street, ' ', Address.House, ' ', Address.AppartmentNumber) AS ADDRSS
+	from Address 
+	WHERE Address.City='самара'
+    ) as t1
+ON passports.AddressId=t1.AddressId
+JOIN 
+	(
+	SELECT Orders.FIO_Id, SUM(Orders.Fullsum) as fullsum
+	FROM Orders   
+	WHERE Orders.OrderDate >= '2018-07-01' and Orders.OrderDate <= '2018-12-31'
+	GROUP BY FIO_Id
+    ) as t2
+ON t2.FIO_Id=passports.fio_id
+JOIN (
+	SELECT FIO.FIO_Id, CONCAT(FIO.FName, ' ', FIO.SName, ' ', FIO.LName) AS full_name
+    from fio
+    ) as t3
+ON passports.fio_id = t3.FIO_Id
+WHERE t2.fullsum>'3000';
+
+
+-- Задача 3.
+-- Произвести розыгрыш среди пользователей по номерам паспортов с использованием T- SQL:
+-- 1. Высчитать сумму всех цифр серии и номера паспорта (Считаем, что все паспорта
+-- Российские, и состоят из цифр  1234 – серия и 567890 – номер. На выходе должно
+-- получиться число меньше десяти. Пример: 1+2+3+4+5+6+7+8+9+0 = 45 = 4+5 = 9
+-- 2. Отсортировать по дате выдачи паспорта
+-- 3. Выбрать первые 10 победителей, сумма цифр серии и паспорта которых кратна 2.
+-- 4. Вывести имя, отчество, фамилию, номер паспорта, дату выдачи паспорта.
+
+DELIMITER //
+
+DROP FUNCTION IF EXISTS sum_dig//
+CREATE FUNCTION s_dig (num int)
+RETURNS INT DETERMINISTIC
+BEGIN 
+DECLARE f_sum int;
+SET f_sum = SUBSTRING(num, 1, 1)+
+		SUBSTRING(num, 2, 1)+
+        SUBSTRING(num, 3, 1)+
+        SUBSTRING(num, 4, 1)+
+        SUBSTRING(num, 5, 1)+
+        SUBSTRING(num, 6, 1)+
+        SUBSTRING(num, 7, 1)+
+        SUBSTRING(num, 8, 1)+
+        SUBSTRING(num, 9, 1)+
+        SUBSTRING(num, 10, 1); 
+RETURN f_sum;
+END//
+
+DROP FUNCTION IF EXISTS sum_digits//
+CREATE FUNCTION sum_digits (num int)
+RETURNS INT DETERMINISTIC
+BEGIN 
+DECLARE f_sum int;
+SET f_sum=s_dig(s_dig(s_dig(num)));
+RETURN f_sum;
+END//
+DELIMITER ;
+
+SELECT tbl.full_name, tbl.Serial, tbl.Number, TBL.S_DIG, tbl.IssuedDate 
+FROM (
+	SELECT FIO.FIO_id, CONCAT(FIO.FName, ' ', FIO.SName, ' ', FIO.LName) AS full_name,
+		t1.Serial, t1.Number, t1.IssuedDate, T1.S_DIG
+	FROM FIO
+	JOIN (
+		SELECT Pass.FIO_id, Pass.PassportId, Pass.Serial, Pass.Number, SUM_DIGITS(CONCAT(Pass.Serial, Pass.Number)) AS S_DIG, SUM_DIGITS(CONCAT(Pass.Serial, Pass.Number)) %2 as division, Pass.IssuedDate
+		FROM Passports as Pass
+		WHERE SUM_DIGITS(CONCAT(Pass.Serial, Pass.Number)) %2 ='0'
+		ORDER BY Pass.IssuedDate
+		LIMIT 10
+        ) as t1
+	ON FIO.FIO_id=t1.FIO_id
+    ) as tbl;
+
+-- Задача 4.
+-- Для текущей схемы данных необходимо сгенерировать 100 пользователей со случайно
+-- сгенерированными именами, отчествами, фамилиями (бессвязный набор букв Ыфдывл,
+-- Хрыва, Фщыывфжыдв), телефонами (вида 75321854321 – тоже случайно, 11 цифр, первая
+-- - 7) и паспортными данными (три-четыре поля). Адрес у всех один: Москва, ул. Большая
+-- Новодмитровская, 14, квартиры с 1 по 100. На них в случайном порядке раскидать 1500
+-- заказов так, чтобы у кого-то было 0 заказов, у кого-то 3, 5 и т.д.
+
+
+-- 1. Для текущей схемы данных необходимо сгенерировать 100 пользователей со случайно
+-- сгенерированными именами, отчествами, фамилиями (бессвязный набор букв Ыфдывл,
+-- Хрыва, Фщыывфжыдв)
+
+
+DELIMITER //
+DROP FUNCTION IF EXISTS rand_word//
+CREATE FUNCTION rand_word ()
+RETURNS varchar(200) DETERMINISTIC
+BEGIN 
+DECLARE word varchar(100);
+DECLARE i INT DEFAULT FLOOR(RAND()*(8-3)+3);
+DECLARE next_l varchar(10);
+DECLARE first_l varchar(10);
+DECLARE part varchar(10) ;
+DECLARE sec_part varchar(100) default SUBSTRING('абвгдеёжзийклмнопрстуфхцчшщъыьэюя', FLOOR(1+(RAND()*33)), 1);
+SET first_l = SUBSTRING('АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ', FLOOR(1+(RAND()*33)), 1);
+WHILE i>0 DO
+	SET next_l=SUBSTRING('абвгдеёжзийклмнопрстуфхцчшщъыьэюя', FLOOR(1+(RAND()*33)), 1);
+    SET part= CONCAT(sec_part,next_l);
+    SET sec_part=part;
+    SET i = i - 1;
+ END WHILE;
+ SET word=CONCAT(first_l, sec_part);
+RETURN word;
+END//
+
+
+DROP PROCEDURE IF EXISTS fill_fio//
+CREATE PROCEDURE fill_fio (in num int)
+BEGIN 
+DECLARE i INT DEFAULT 0;
+WHILE i<num DO
+	INSERT INTO FIO (Fname, Sname, Lname) VALUES (rand_word(), rand_word(), rand_word());
+    SET i = i + 1;
+ END WHILE;
+END//
+
+call fill_fio(100)//
+select * from fio//
+
+-- телефонами (вида 75321854321 – тоже случайно, 11 цифр, первая
+-- - 7) и паспортными данными (три-четыре поля)
+
+DROP FUNCTION IF EXISTS rand_number//
+CREATE FUNCTION rand_number ()
+RETURNS varchar(100) DETERMINISTIC
+BEGIN 
+DECLARE num varchar(100);
+	set num = FLOOR(RAND()*(7000000000-7999999999)+7999999999);
+RETURN num;
+END//
+
+DROP PROCEDURE IF EXISTS fill_phones//
+CREATE PROCEDURE fill_phones (in num int)
+BEGIN 
+DECLARE i INT DEFAULT 0;
+WHILE i<num DO
+	INSERT INTO phones (Phonenumber) VALUES (rand_number());
+    SET i = i + 1;
+ END WHILE;
+END//
+call fill_phones(5)//
+select * from phones//
+
+CREATE PROCEDURE fill_passports (in num int)
+BEGIN 
+DECLARE i INT DEFAULT 0;
+WHILE i<num DO
+INSERT INTO passports (FIO_id, `serial`, `Number`, `Issueddate`, `birthcity`, `birthday`, `Address_id`)
+ VALUES (
+ FLOOR(RAND()*(1-100)+100), 
+ FLOOR(RAND()*(0000-9999)+9999), 
+ FLOOR(RAND()*(00000-99999)+99999), 
+ date(FROM_UNIXTIME( 
+  RAND( ) * ( UNIX_TIMESTAMP( '2015-12-31' ) - UNIX_TIMESTAMP( '2015-01-01' ) ) + UNIX_TIMESTAMP( '2011-01-01' ))),
+rand_word(), 
+date(FROM_UNIXTIME( 
+  RAND( ) * ( UNIX_TIMESTAMP( '2000-12-31' ) - UNIX_TIMESTAMP( '2002-01-01' ) ) + UNIX_TIMESTAMP( '2011-01-01' ))),
+FLOOR(RAND()*(1-100)+100));
+ SET i = i + 1;
+ END WHILE;
+END//
+
+call fill_passports (5)//
+-- Москва, ул. Большая Новодмитровская, 14, квартиры с 1 по 100. 
+DROP PROCEDURE IF EXISTS fill_address//
+CREATE PROCEDURE fill_address (in num int)
+BEGIN 
+DECLARE i INT DEFAULT 1;
+WHILE i<num DO
+INSERT INTO address (`city`,`street`, `House`, `AppartmentNumber`,`PorchNumber`,`Floor`)
+ VALUES (
+ 'Москва', 
+ 'ул. Большая Новодмитровская', 
+ '14',
+ i, 
+ FLOOR(RAND()*(1-150)+150),
+ FLOOR(RAND()*(1-30)+30));
+ SET i = i + 1;
+ END WHILE;
+END//
+
+call fill_address (101)//
+select * from address//
+
+
+
+-- Для текущей схемы данных необходимо сгенерировать 100 пользователей со случайно
+-- сгенерированными именами, отчествами, фамилиями (бессвязный набор букв Ыфдывл,
+-- Хрыва, Фщыывфжыдв), телефонами (вида 75321854321 – тоже случайно, 11 цифр, первая
+-- - 7) и паспортными данными (три-четыре поля). Адрес у всех один: Москва, ул. Большая
+-- Новодмитровская, 14, квартиры с 1 по 100. На них в случайном порядке раскидать 1500
+-- заказов так, чтобы у кого-то было 0 заказов, у кого-то 3, 5 и т.д.
+
+truncate table orders;
+
+DROP FUNCTION IF EXISTS spec//
+CREATE FUNCTION spec ()
+RETURNS int DETERMINISTIC
+BEGIN 
+DECLARE i INT DEFAULT FLOOR(RAND()*(1-100)+100);
+while i%9=0 DO 
+    SET i=FLOOR(RAND()*(1-100)+100);
+ END WHILE;
+RETURN i;
+END//
+
+
+DROP PROCEDURE IF EXISTS fill_orders//
+CREATE PROCEDURE fill_orders (in num int)
+BEGIN 
+DECLARE i INT DEFAULT 0;
+WHILE i<num DO
+INSERT INTO orders (`FIO_Id`, `address_id`, `fullsum`)
+ VALUES (
+	 spec(), 
+	 FLOOR(RAND()*(1-100)+100),
+	 FLOOR(RAND()*(200-1500)+1500));
+ SET i = i + 1;
+ END WHILE;
+END//
+
+call fill_orders(150)//
+select * from orders//
+select FIO_id, count(FIO_id) from orders group by FIO_id//
+
+SELECT FIO.FIO_ID, Orders.OrderId, ORDERS.FIO_ID FROM FIO 
+LEFT JOIN ORDERS
+ON FIO.FIO_ID=ORDERS.FIO_ID
+WHERE ORDERS.FIO_ID IS NULL//
+
+
+SELECT * FROM ORDERPHONES//
+
+INSERT INTO OrderPhones (OrderId) 
+SELECT OrderId 
+FROM Orders 
+where FIO_Id IN (65,71,20,6, 97)//
+
+
+UPDATE OrderPhones 
+SET PhoneId=1 
+WHERE OrderId IN (
+SELECT Orders.OrderId FROM ORDERS
+WHERE ORDERS.FIO_ID =65);
+UPDATE OrderPhones 
+SET PhoneId=2 
+WHERE OrderId IN (
+SELECT Orders.OrderId FROM ORDERS
+WHERE ORDERS.FIO_ID =71);
+UPDATE OrderPhones 
+SET PhoneId=3
+WHERE OrderId IN (
+SELECT Orders.OrderId FROM ORDERS
+WHERE ORDERS.FIO_ID = 20);
+UPDATE OrderPhones 
+SET PhoneId=4
+WHERE OrderId IN (
+SELECT Orders.OrderId FROM ORDERS
+WHERE ORDERS.FIO_ID= 6);
+UPDATE OrderPhones 
+SET PhoneId=5 
+WHERE OrderId IN (
+SELECT Orders.OrderId FROM ORDERS
+WHERE ORDERS.FIO_ID = 97)//
+
+
+
+desc orderPHONES//
+desc orders//
+desc phones//
+show tables//
+SELECT * FROM PHONES//
+SELECT COUNT(*) FROM ORDERS//
+SELECT * FROM ORDERS//
+SELECT * FROM fio//
