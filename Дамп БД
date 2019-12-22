@@ -1,0 +1,228 @@
+-- MySQL dump 10.13  Distrib 8.0.18, for macos10.14 (x86_64)
+--
+-- Host: 127.0.0.1    Database: TEST_EX1
+-- ------------------------------------------------------
+-- Server version	8.0.18
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `address`
+--
+
+DROP TABLE IF EXISTS `address`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `address` (
+  `AddressId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `city` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `street` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `House` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `AppartmentNumber` int(11) NOT NULL,
+  `PorchNumber` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `Floor` int(11) NOT NULL,
+  PRIMARY KEY (`AddressId`)
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `address`
+--
+
+LOCK TABLES `address` WRITE;
+/*!40000 ALTER TABLE `address` DISABLE KEYS */;
+INSERT INTO `address` VALUES (1,'Москва','ул. Большая Новодмитровская','14',1,'88',13),(2,'Москва','ул. Большая Новодмитровская','14',2,'70',29),(3,'Москва','ул. Большая Новодмитровская','14',3,'87',27),(4,'Москва','ул. Большая Новодмитровская','14',4,'117',6),(5,'Москва','ул. Большая Новодмитровская','14',5,'99',21),(6,'Москва','ул. Большая Новодмитровская','14',6,'74',12),(7,'Москва','ул. Большая Новодмитровская','14',7,'68',3),(8,'Москва','ул. Большая Новодмитровская','14',8,'17',8),(9,'Москва','ул. Большая Новодмитровская','14',9,'149',6),(10,'Москва','ул. Большая Новодмитровская','14',10,'5',16),(11,'Москва','ул. Большая Новодмитровская','14',11,'79',2),(12,'Москва','ул. Большая Новодмитровская','14',12,'109',14),(13,'Москва','ул. Большая Новодмитровская','14',13,'17',6),(14,'Москва','ул. Большая Новодмитровская','14',14,'81',6),(15,'Москва','ул. Большая Новодмитровская','14',15,'39',22),(16,'Москва','ул. Большая Новодмитровская','14',16,'2',23),(17,'Москва','ул. Большая Новодмитровская','14',17,'125',25),(18,'Москва','ул. Большая Новодмитровская','14',18,'117',11),(19,'Москва','ул. Большая Новодмитровская','14',19,'59',27),(20,'Москва','ул. Большая Новодмитровская','14',20,'54',3),(21,'Москва','ул. Большая Новодмитровская','14',21,'50',12),(22,'Москва','ул. Большая Новодмитровская','14',22,'7',29),(23,'Москва','ул. Большая Новодмитровская','14',23,'119',1),(24,'Москва','ул. Большая Новодмитровская','14',24,'108',16),(25,'Москва','ул. Большая Новодмитровская','14',25,'85',6),(26,'Москва','ул. Большая Новодмитровская','14',26,'43',25),(27,'Москва','ул. Большая Новодмитровская','14',27,'56',10),(28,'Москва','ул. Большая Новодмитровская','14',28,'67',9),(29,'Москва','ул. Большая Новодмитровская','14',29,'17',21),(30,'Москва','ул. Большая Новодмитровская','14',30,'18',16),(31,'Москва','ул. Большая Новодмитровская','14',31,'38',21),(32,'Москва','ул. Большая Новодмитровская','14',32,'114',21),(33,'Москва','ул. Большая Новодмитровская','14',33,'30',27),(34,'Москва','ул. Большая Новодмитровская','14',34,'135',24),(35,'Москва','ул. Большая Новодмитровская','14',35,'56',13),(36,'Москва','ул. Большая Новодмитровская','14',36,'1',22),(37,'Москва','ул. Большая Новодмитровская','14',37,'98',3),(38,'Москва','ул. Большая Новодмитровская','14',38,'71',3),(39,'Москва','ул. Большая Новодмитровская','14',39,'4',26),(40,'Москва','ул. Большая Новодмитровская','14',40,'37',19),(41,'Москва','ул. Большая Новодмитровская','14',41,'65',8),(42,'Москва','ул. Большая Новодмитровская','14',42,'147',5),(43,'Москва','ул. Большая Новодмитровская','14',43,'113',11),(44,'Москва','ул. Большая Новодмитровская','14',44,'70',9),(45,'Москва','ул. Большая Новодмитровская','14',45,'21',23),(46,'Москва','ул. Большая Новодмитровская','14',46,'63',24),(47,'Москва','ул. Большая Новодмитровская','14',47,'114',12),(48,'Москва','ул. Большая Новодмитровская','14',48,'96',2),(49,'Москва','ул. Большая Новодмитровская','14',49,'53',18),(50,'Москва','ул. Большая Новодмитровская','14',50,'134',21),(51,'Москва','ул. Большая Новодмитровская','14',51,'128',5),(52,'Москва','ул. Большая Новодмитровская','14',52,'30',16),(53,'Москва','ул. Большая Новодмитровская','14',53,'18',28),(54,'Москва','ул. Большая Новодмитровская','14',54,'58',3),(55,'Москва','ул. Большая Новодмитровская','14',55,'46',8),(56,'Москва','ул. Большая Новодмитровская','14',56,'52',29),(57,'Москва','ул. Большая Новодмитровская','14',57,'119',3),(58,'Москва','ул. Большая Новодмитровская','14',58,'2',24),(59,'Москва','ул. Большая Новодмитровская','14',59,'8',24),(60,'Москва','ул. Большая Новодмитровская','14',60,'133',1),(61,'Москва','ул. Большая Новодмитровская','14',61,'60',28),(62,'Москва','ул. Большая Новодмитровская','14',62,'86',1),(63,'Москва','ул. Большая Новодмитровская','14',63,'48',17),(64,'Москва','ул. Большая Новодмитровская','14',64,'143',1),(65,'Москва','ул. Большая Новодмитровская','14',65,'33',1),(66,'Москва','ул. Большая Новодмитровская','14',66,'76',14),(67,'Москва','ул. Большая Новодмитровская','14',67,'112',11),(68,'Москва','ул. Большая Новодмитровская','14',68,'85',23),(69,'Москва','ул. Большая Новодмитровская','14',69,'17',8),(70,'Москва','ул. Большая Новодмитровская','14',70,'4',9),(71,'Москва','ул. Большая Новодмитровская','14',71,'57',1),(72,'Москва','ул. Большая Новодмитровская','14',72,'2',28),(73,'Москва','ул. Большая Новодмитровская','14',73,'110',24),(74,'Москва','ул. Большая Новодмитровская','14',74,'135',2),(75,'Москва','ул. Большая Новодмитровская','14',75,'87',22),(76,'Москва','ул. Большая Новодмитровская','14',76,'140',14),(77,'Москва','ул. Большая Новодмитровская','14',77,'84',11),(78,'Москва','ул. Большая Новодмитровская','14',78,'27',23),(79,'Москва','ул. Большая Новодмитровская','14',79,'57',17),(80,'Москва','ул. Большая Новодмитровская','14',80,'95',15),(81,'Москва','ул. Большая Новодмитровская','14',81,'85',11),(82,'Москва','ул. Большая Новодмитровская','14',82,'18',15),(83,'Москва','ул. Большая Новодмитровская','14',83,'20',5),(84,'Москва','ул. Большая Новодмитровская','14',84,'67',22),(85,'Москва','ул. Большая Новодмитровская','14',85,'49',13),(86,'Москва','ул. Большая Новодмитровская','14',86,'16',8),(87,'Москва','ул. Большая Новодмитровская','14',87,'9',14),(88,'Москва','ул. Большая Новодмитровская','14',88,'18',7),(89,'Москва','ул. Большая Новодмитровская','14',89,'112',3),(90,'Москва','ул. Большая Новодмитровская','14',90,'21',14),(91,'Москва','ул. Большая Новодмитровская','14',91,'129',28),(92,'Москва','ул. Большая Новодмитровская','14',92,'20',24),(93,'Москва','ул. Большая Новодмитровская','14',93,'103',29),(94,'Москва','ул. Большая Новодмитровская','14',94,'139',20),(95,'Москва','ул. Большая Новодмитровская','14',95,'76',16),(96,'Москва','ул. Большая Новодмитровская','14',96,'33',14),(97,'Москва','ул. Большая Новодмитровская','14',97,'97',25),(98,'Москва','ул. Большая Новодмитровская','14',98,'46',29),(99,'Москва','ул. Большая Новодмитровская','14',99,'1',2),(100,'Москва','ул. Большая Новодмитровская','14',100,'44',9);
+/*!40000 ALTER TABLE `address` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `FIO`
+--
+
+DROP TABLE IF EXISTS `FIO`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `FIO` (
+  `FIO_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `Fname` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Sname` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Lname` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`FIO_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `FIO`
+--
+
+LOCK TABLES `FIO` WRITE;
+/*!40000 ALTER TABLE `FIO` DISABLE KEYS */;
+INSERT INTO `FIO` VALUES (1,'Ьнзпщоя','Олжшгёф','Вмднщфще'),(2,'Члсфсщ','Яёмаьм','Ёнутдъ'),(3,'Нкёусядч','Щтжщйе','Дюъцвзгхв'),(4,'Гфспщс','Ьнедеош','Рёюзнмх'),(5,'Ььъму','Яиаечёчгк','Сежоцвз'),(6,'Афвлу','Тьйъдзыти','Йожедемп'),(7,'Оймтцщ','Аэзиузннь','Еьддй'),(8,'Щудзю','Шэаыжошны','Жнънх'),(9,'Шфьжн','Лювжыус','Угыкёалыд'),(10,'Рмнрн','Шздклшщ','Цюцоётйъ'),(11,'Гсьдюо','Чтащбц','Йджгъыъ'),(12,'Вкймащб','Хбкубнвве','Ьсъншснр'),(13,'Яжзкюш','Шрибнацрс','Ыиочл'),(14,'Ффжеёпю','Йёяавл','Цьъяокль'),(15,'Зтнпгг','Зйиуи','Сиыупцви'),(16,'Дхфщг','Хнечж','Чьячщчйлю'),(17,'Йархъеи','Ъюйбйпрвы','Мюжых'),(18,'Ъъцвзяёв','Ссвфдуша','Щъпгятву'),(19,'Кдйонщце','Гбмчоемс','Ядсшжън'),(20,'Жпфопбхк','Ипягрлжа','Гъбщяо'),(21,'Ршкёэюб','Быхжбфг','Вйлхзёз'),(22,'Рпдгдигт','Пциэыочк','Плиаечи'),(23,'Чбрмр','Фдымод','Мтжэю'),(24,'Къилббвиж','Дтасщй','Тщсюё'),(25,'Ефщто','Онвюпхы','Чээкэф'),(26,'Отоатяв','Гыывщщу','Опъцгклю'),(27,'Жжрюеэёд','Щаацо','Сызрэя'),(28,'Ошахй','Бюлхйрч','Тмъйд'),(29,'Слхцтцьз','Емрезъмс','Памрнср'),(30,'Шгрлёэяжв','Ъужхшщхб','Щфбьж'),(31,'Ыьцьйяю','Чахеъуса','Фякшыюё'),(32,'Ужмзю','Ойлнг','Бюктэщ'),(33,'Ююынфя','Йъбикшэйч','Янтбнбэо'),(34,'Ччтфрчвг','Аертйь','Йчипхъе'),(35,'Хдаяьт','Гкмъъч','Ацьмл'),(36,'Гоердгдй','Сщотп','Чфщчкоккч'),(37,'Сфщйзиф','Льзеюл','Юшнигфбеш'),(38,'Нпцеца','Дщжщзюявл','Ымдбщюла'),(39,'Ухябксшдн','Мсовэноя','Жссвфби'),(40,'Дтыэбо','Ёщусьч','Евтнн'),(41,'Рзыщккшцй','Смфтаин','Хыцуэш'),(42,'Шждму','Ллщыыцбгл','Щэеоыычг'),(43,'Нилтъй','Нсуцш','Фдъжфпто'),(44,'Вкксххо','Нвятяж','Ыъшйж'),(45,'Цзщщц','Субрр','Тшфрф'),(46,'Аерффзйы','Цэыеён','Ыюлилаэр'),(47,'Кауврмодж','Жгщклшшп','Ъцянжщ'),(48,'Ьлжпшк','Эаохюцф','Ъгэдщх'),(49,'Одбшх','Сълеш','Иакюцч'),(50,'Илкэтгъ','Тлшгивое','Кчпошсо'),(51,'Фцдчйкъг','Ышэяз','Жуишэм'),(52,'Цыюуёг','Ъшыщм','Ьцжофый'),(53,'Мйбяъ','Дшзюяв','Ьтчаьл'),(54,'Ацаюч','Щйдёусэыу','Зшаззпш'),(55,'Мзехъд','Ккубм','Црббефщяп'),(56,'Якяынсп','Йсяюшбыеж','Иьчъэдюи'),(57,'Дёвяччна','Мптумдоь','Тркяь'),(58,'Вэуьукы','Зъьфуе','Яемеутгчл'),(59,'Угчьжммщ','Ттгчпелмы','Дьахм'),(60,'Фпщбщюзот','Ияооэед','Ллшщу'),(61,'Йэщвюрщм','Иитбпйгф','Цжыеиэчюо'),(62,'Хпьоухс','Жйдюмжьщл','Шшттев'),(63,'Гллсупскв','Бмбвзб','Гйуцчтх'),(64,'Ьеанваюх','Оупддкз','Ьшдвют'),(65,'Внвгй','Гуфэчы','Эицъа'),(66,'Заеежфсъ','Чиьедзь','Въыдацпн'),(67,'Фхеюевъ','Дюъцбефцф','Вхзгщ'),(68,'Мынафзйь','Хутююыр','Амъгбэноб'),(69,'Цтыёйагр','Гаоахи','Фуитбнг'),(70,'Уысъсж','Мснясьч','Ндшпж'),(71,'Нхбюуита','Жмъоэд','Алюфнзэьф'),(72,'Юежкбёщл','Сфытйэф','Грачуып'),(73,'Ёжмовачшф','Офлрнущжу','Шфыарсё'),(74,'Ьёърдд','Эцпчёц','Вщьищвбяч'),(75,'Зпълмъям','Ёрммщ','Ънюзмидэ'),(76,'Жэйыо','Гбпвэлгм','Жзмиёдгг'),(77,'Ищгтхх','Дуъхэт','Ъвюйх'),(78,'Хёшъщсм','Элофщв','Влкмгибна'),(79,'Йющярчбги','Адцплм','Сзвуяадхь'),(80,'Йшкщюла','Цодпейбкт','Уфёбцнацт'),(81,'Клфеъшидш','Еьёмркё','Ъьнчкпрвщ'),(82,'Щфгбюфкые','Еачёчё','Рэътпчдп'),(83,'Ыщъфх','Яигфъжф','Цгёээююь'),(84,'Ядсщлнд','Оиоыэг','Йвйчцлшх'),(85,'Ахяьр','Цксфсытле','Щччлтщжц'),(86,'Гтчобьжса','Мдсфрця','Ьвйъиынтф'),(87,'Дрвяхпо','Жчэьцъгюн','Ытпьал'),(88,'Фбёаоллшщ','Хцкугфяя','Оыхабехюх'),(89,'Дрвютай','Ьэцыезч','Эщихс'),(90,'Щшцдсмйй','Лцчуъйби','Вттщжф'),(91,'Щкыамащя','Йщждюол','Гръэвфб'),(92,'Чыдпб','Ьмищвэпу','Вмёхыёощ'),(93,'Вгаэпче','Дъжффинк','Ккувпжх'),(94,'Чкфяюэфт','Ючфлютвуэ','Ятеэбплм'),(95,'Ьйочжюбмь','Фцдхбё','Иймзбпки'),(96,'Шяюонщ','Жътихтэъ','Ззрьэъ'),(97,'Бьтцыез','Аъфеъцаю','Авыжсвчн'),(98,'Жыпшн','Ъыпвъюжкю','Чзюпцвжых'),(99,'Цбмашщчзд','Рщзулвёцю','Зхёжтзпч'),(100,'Ьхосо','Кыешлтыо','Йшжжнрзшд');
+/*!40000 ALTER TABLE `FIO` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Masters`
+--
+
+DROP TABLE IF EXISTS `Masters`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Masters` (
+  `MasterId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `PassportId` int(10) unsigned DEFAULT NULL,
+  `RealAddressId` int(10) unsigned DEFAULT NULL,
+  `HireDate` date DEFAULT NULL,
+  PRIMARY KEY (`MasterId`),
+  KEY `Masters_PassportId_FK` (`PassportId`),
+  KEY `Masters_RealAddressId_FK` (`RealAddressId`),
+  CONSTRAINT `Masters_PassportId_FK` FOREIGN KEY (`PassportId`) REFERENCES `passports` (`passportId`) ON DELETE CASCADE,
+  CONSTRAINT `Masters_RealAddressId_FK` FOREIGN KEY (`RealAddressId`) REFERENCES `address` (`AddressId`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Masters`
+--
+
+LOCK TABLES `Masters` WRITE;
+/*!40000 ALTER TABLE `Masters` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Masters` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `OrderPhones`
+--
+
+DROP TABLE IF EXISTS `OrderPhones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `OrderPhones` (
+  `OrderId` int(10) unsigned DEFAULT NULL,
+  `PhoneID` int(10) unsigned DEFAULT NULL,
+  KEY `OrderPhones_OrderId_FK` (`OrderId`),
+  KEY `OrderPhones_PhoneId_FK` (`PhoneID`),
+  CONSTRAINT `OrderPhones_OrderId_FK` FOREIGN KEY (`OrderId`) REFERENCES `orders` (`OrderId`) ON DELETE CASCADE,
+  CONSTRAINT `OrderPhones_PhoneId_FK` FOREIGN KEY (`PhoneID`) REFERENCES `phones` (`PhoneId`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `OrderPhones`
+--
+
+LOCK TABLES `OrderPhones` WRITE;
+/*!40000 ALTER TABLE `OrderPhones` DISABLE KEYS */;
+INSERT INTO `OrderPhones` VALUES (4,1),(14,1),(17,5),(18,5),(71,4),(83,2),(96,3),(97,2),(99,3),(110,1),(116,5),(130,4);
+/*!40000 ALTER TABLE `OrderPhones` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `orders`
+--
+
+DROP TABLE IF EXISTS `orders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `orders` (
+  `OrderId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `FIO_Id` int(10) unsigned DEFAULT NULL,
+  `AddressId` int(10) unsigned DEFAULT NULL,
+  `fullsum` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `MasterId` int(10) unsigned DEFAULT NULL,
+  `OrderDate` date DEFAULT NULL,
+  PRIMARY KEY (`OrderId`),
+  KEY `orders_AdressId_fk` (`AddressId`),
+  KEY `orders_FIO_id_fk` (`FIO_Id`),
+  KEY `orders_MasterId_fk` (`MasterId`),
+  CONSTRAINT `orders_AdressId_fk` FOREIGN KEY (`AddressId`) REFERENCES `address` (`AddressId`) ON DELETE SET NULL,
+  CONSTRAINT `orders_FIO_id_fk` FOREIGN KEY (`FIO_Id`) REFERENCES `fio` (`FIO_id`) ON DELETE SET NULL,
+  CONSTRAINT `orders_MasterId_fk` FOREIGN KEY (`MasterId`) REFERENCES `masters` (`MasterId`) ON DELETE SET NULL
+) ENGINE=InnoDB AUTO_INCREMENT=151 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `orders`
+--
+
+LOCK TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES (1,88,35,'321',NULL,NULL),(2,41,77,'1038',NULL,NULL),(3,89,55,'277',NULL,NULL),(4,65,6,'665',NULL,NULL),(5,61,97,'255',NULL,NULL),(6,29,32,'1130',NULL,NULL),(7,47,6,'1348',NULL,NULL),(8,25,59,'497',NULL,NULL),(9,12,48,'278',NULL,NULL),(10,86,14,'343',NULL,NULL),(11,13,32,'474',NULL,NULL),(12,10,83,'1372',NULL,NULL),(13,29,46,'722',NULL,NULL),(14,65,3,'460',NULL,NULL),(15,91,97,'386',NULL,NULL),(16,78,49,'314',NULL,NULL),(17,97,62,'417',NULL,NULL),(18,97,39,'201',NULL,NULL),(19,84,22,'912',NULL,NULL),(20,10,82,'1260',NULL,NULL),(21,62,67,'845',NULL,NULL),(22,46,81,'1095',NULL,NULL),(23,1,94,'1125',NULL,NULL),(24,73,51,'649',NULL,NULL),(25,21,2,'793',NULL,NULL),(26,23,77,'442',NULL,NULL),(27,61,48,'974',NULL,NULL),(28,52,83,'989',NULL,NULL),(29,53,82,'859',NULL,NULL),(30,88,19,'574',NULL,NULL),(31,87,49,'1289',NULL,NULL),(32,8,25,'1475',NULL,NULL),(33,92,9,'1072',NULL,NULL),(34,10,46,'222',NULL,NULL),(35,70,47,'527',NULL,NULL),(36,84,45,'1130',NULL,NULL),(37,24,3,'771',NULL,NULL),(38,11,23,'1278',NULL,NULL),(39,77,50,'448',NULL,NULL),(40,69,9,'665',NULL,NULL),(41,61,44,'685',NULL,NULL),(42,60,37,'277',NULL,NULL),(43,19,73,'331',NULL,NULL),(44,32,29,'811',NULL,NULL),(45,50,8,'1354',NULL,NULL),(46,21,39,'630',NULL,NULL),(47,48,40,'912',NULL,NULL),(48,55,11,'1353',NULL,NULL),(49,12,91,'469',NULL,NULL),(50,31,91,'1043',NULL,NULL),(51,50,56,'580',NULL,NULL),(52,78,6,'1389',NULL,NULL),(53,41,30,'567',NULL,NULL),(54,51,68,'1362',NULL,NULL),(55,43,44,'1410',NULL,NULL),(56,33,86,'611',NULL,NULL),(57,5,22,'1459',NULL,NULL),(58,19,2,'897',NULL,NULL),(59,53,74,'406',NULL,NULL),(60,55,28,'1176',NULL,NULL),(61,91,32,'1283',NULL,NULL),(62,23,62,'737',NULL,NULL),(63,22,83,'900',NULL,NULL),(64,19,30,'1434',NULL,NULL),(65,85,40,'752',NULL,NULL),(66,94,43,'633',NULL,NULL),(67,38,87,'512',NULL,NULL),(68,58,19,'455',NULL,NULL),(69,42,49,'474',NULL,NULL),(70,58,26,'936',NULL,NULL),(71,6,56,'1048',NULL,NULL),(72,58,93,'1412',NULL,NULL),(73,86,51,'1450',NULL,NULL),(74,28,52,'1193',NULL,NULL),(75,26,99,'460',NULL,NULL),(76,2,48,'673',NULL,NULL),(77,37,77,'1157',NULL,NULL),(78,37,64,'331',NULL,NULL),(79,58,59,'487',NULL,NULL),(80,33,99,'1477',NULL,NULL),(81,92,68,'1020',NULL,NULL),(82,11,65,'1415',NULL,NULL),(83,71,77,'1160',NULL,NULL),(84,60,90,'1114',NULL,NULL),(85,98,45,'588',NULL,NULL),(86,15,85,'1258',NULL,NULL),(87,51,12,'261',NULL,NULL),(88,88,30,'1279',NULL,NULL),(89,26,78,'368',NULL,NULL),(90,32,18,'1438',NULL,NULL),(91,23,28,'1120',NULL,NULL),(92,70,41,'1393',NULL,NULL),(93,37,9,'619',NULL,NULL),(94,1,58,'1375',NULL,NULL),(95,76,13,'605',NULL,NULL),(96,20,3,'925',NULL,NULL),(97,71,87,'504',NULL,NULL),(98,55,7,'1084',NULL,NULL),(99,20,94,'355',NULL,NULL),(100,77,50,'463',NULL,NULL),(101,50,89,'1472',NULL,NULL),(102,21,10,'1311',NULL,NULL),(103,39,97,'1090',NULL,NULL),(104,51,52,'254',NULL,NULL),(105,66,17,'1296',NULL,NULL),(106,11,34,'706',NULL,NULL),(107,92,46,'888',NULL,NULL),(108,73,88,'471',NULL,NULL),(109,39,35,'896',NULL,NULL),(110,65,64,'520',NULL,NULL),(111,32,84,'521',NULL,NULL),(112,85,12,'202',NULL,NULL),(113,67,35,'1166',NULL,NULL),(114,66,8,'728',NULL,NULL),(115,79,77,'793',NULL,NULL),(116,97,49,'914',NULL,NULL),(117,69,67,'554',NULL,NULL),(118,35,92,'931',NULL,NULL),(119,5,56,'1024',NULL,NULL),(120,50,61,'937',NULL,NULL),(121,98,24,'496',NULL,NULL),(122,43,44,'1423',NULL,NULL),(123,38,6,'405',NULL,NULL),(124,62,62,'532',NULL,NULL),(125,41,29,'470',NULL,NULL),(126,26,76,'233',NULL,NULL),(127,85,17,'597',NULL,NULL),(128,2,17,'1215',NULL,NULL),(129,41,69,'492',NULL,NULL),(130,6,62,'1388',NULL,NULL),(131,84,8,'1274',NULL,NULL),(132,91,11,'1210',NULL,NULL),(133,57,51,'1325',NULL,NULL),(134,78,33,'562',NULL,NULL),(135,42,24,'1421',NULL,NULL),(136,98,13,'1042',NULL,NULL),(137,87,43,'853',NULL,NULL),(138,24,68,'1120',NULL,NULL),(139,49,30,'272',NULL,NULL),(140,37,69,'633',NULL,NULL),(141,60,98,'400',NULL,NULL),(142,80,55,'663',NULL,NULL),(143,13,55,'685',NULL,NULL),(144,22,98,'544',NULL,NULL),(145,37,5,'368',NULL,NULL),(146,51,16,'507',NULL,NULL),(147,92,43,'722',NULL,NULL),(148,70,33,'872',NULL,NULL),(149,60,47,'916',NULL,NULL),(150,34,3,'340',NULL,NULL);
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `passports`
+--
+
+DROP TABLE IF EXISTS `passports`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `passports` (
+  `passportId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `FIO_id` int(10) unsigned DEFAULT NULL,
+  `serial` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `Number` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `Issueddate` date NOT NULL,
+  `birthcity` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `birthday` date NOT NULL,
+  `AddressId` int(11) NOT NULL,
+  PRIMARY KEY (`passportId`),
+  KEY `passports_FIO_id_fk` (`FIO_id`),
+  CONSTRAINT `passports_FIO_id_fk` FOREIGN KEY (`FIO_id`) REFERENCES `fio` (`FIO_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `passports`
+--
+
+LOCK TABLES `passports` WRITE;
+/*!40000 ALTER TABLE `passports` DISABLE KEYS */;
+INSERT INTO `passports` VALUES (1,56,'8166','40009','2011-06-13','Дьюмгкл','2010-02-19',81),(2,65,'8242','16355','2011-08-27','Быфдчжяж','2010-10-30',82),(3,62,'6598','42451','2011-11-09','Нжспъцю','2010-04-10',27),(4,52,'7994','43476','2011-03-23','Бощэегв','2010-12-30',20),(5,1,'4256','11593','2011-09-11','Ьвзсяйтбп','2010-09-28',16);
+/*!40000 ALTER TABLE `passports` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Phones`
+--
+
+DROP TABLE IF EXISTS `Phones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Phones` (
+  `PhoneId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `PhoneNumber` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`PhoneId`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Phones`
+--
+
+LOCK TABLES `Phones` WRITE;
+/*!40000 ALTER TABLE `Phones` DISABLE KEYS */;
+INSERT INTO `Phones` VALUES (1,'79591833734'),(2,'71279360355'),(3,'70362052787'),(4,'70012636205'),(5,'74538073564');
+/*!40000 ALTER TABLE `Phones` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2019-12-22 17:58:35
